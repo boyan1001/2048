@@ -1,5 +1,5 @@
 import pygame, sys
-import colors
+from UI import colors
 from pygame.locals import *
 
 # color
