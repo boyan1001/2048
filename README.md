@@ -11,7 +11,7 @@ Requirement
 2048 - Summer Version made by **pygame**, so if you wanna play it or participate the development. You need to install pygame in your computer first.  
   
 Please make sure whether you install the **python** and **pip** or not:  
-*(python version required: python 3.10 and below)*  
+*(python version required: python 3.10 and above)*  
 ```bach
 python3 --version
 pip --version
