@@ -3,6 +3,7 @@ from UI import colors
 from UI import text
 from UI import button
 from pygame.locals import *
+
 # Colors
 WHITE = colors.hexToRgb('#FFFFFF')
 BLACK = colors.hexToRgb('#000000')
@@ -28,10 +29,12 @@ FRENCHVOILET = colors.hexToRgb('#7400B8') # 紫羅蘭色
 
 
 # Screen
+FPS = 60
 screen_width = 400
 screen_height = 600
 pygame.init()
 screen = pygame.display.set_mode((screen_width, screen_height))
+clock = pygame.time.Clock()
 pygame.display.set_caption('2048')
 
 # Font
@@ -46,6 +49,7 @@ buttons.append(button.Button(pygame.Rect(0.2 * screen_width, 0.45 * screen_heigh
 buttons.append(button.Button(pygame.Rect(0.2 * screen_width, 0.575 * screen_height, 0.6 * screen_width, 0.1 * screen_height), AERO, 'SETTING', WHITE, title_font_link, 35))
 buttons.append(button.Button(pygame.Rect(0.2 * screen_width, 0.7 * screen_height, 0.6 * screen_width, 0.1 * screen_height), AERO, 'ABOUTUS', WHITE, title_font_link, 35))
 while True:
+    clock.tick(FPS)
     # Event handing
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -54,6 +58,10 @@ while True:
         x, y = pygame.mouse.get_pos()
         for button in buttons:
             button.clickJudge(x, y)
+        if event.type == MOUSEBUTTONDOWN:
+            for button in buttons:
+                if button.choose:
+                    print(button.text)
 
     # Draw the screen
     screen.fill(TURQUOISE)
