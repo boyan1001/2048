@@ -24,7 +24,7 @@ pip install pygame
 ```
 If you finish the steps below successfully. You can execute the program in your terminal now.  
   
-The program can execute successfully on **Window, MacOs ans Linux**.  
+The program can execute successfully on **Window, MacOs and Linux**.  
   
 Usage
 ---
