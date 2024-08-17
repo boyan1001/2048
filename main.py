@@ -33,7 +33,9 @@ pygame.init()
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
 pygame.display.set_caption('2048')
-page_value = 0
+now_page_value = 0
+prev_page_value = 0
+# button_colddown_time = 0
 
 # Font
 title_font_link = './docs/asset/font/Roboto-Bold.ttf'
@@ -49,13 +51,16 @@ buttons.append(UI.Button(pygame.Rect(0.2 * screen_width, 0.45 * screen_height, 0
 buttons.append(UI.Button(pygame.Rect(0.2 * screen_width, 0.575 * screen_height, 0.6 * screen_width, 0.1 * screen_height), UNITEDNATIONSBLUE, 'SETTING', WHITE, title_font_link, 35, '0to2'))
 buttons.append(UI.Button(pygame.Rect(0.2 * screen_width, 0.7 * screen_height, 0.6 * screen_width, 0.1 * screen_height), UNITEDNATIONSBLUE, 'ABOUTUS', WHITE, title_font_link, 35, '0to3'))
 buttons_set.append(buttons)
-
+# game page
+buttons = []
+buttons.append(UI.Button(pygame.Rect(0.7 * screen_width, 0.2 * screen_height, 0.2 * screen_width, 0.05 * screen_height), TURQUOISE, 'MENU', WHITE, title_font_link, 20, '1to0'))
+buttons_set.append(buttons)
 # image
 home_page_background = pygame.image.load('./docs/asset/image/home_page_background.png')
 home_page_background = pygame.transform.scale(home_page_background, (screen_width, screen_height * 1.2))
 home_page_background.convert()
 
-def home_page():
+def homePage():
     # Draw the screen
     screen.fill(TURQUOISE)
     screen.blit(home_page_background, (0, 0))
@@ -65,23 +70,39 @@ def home_page():
     for button in buttons_set[0]:
         button.draw(screen)
 
+def gamePage():
+    # Draw the screen
+    screen.fill(BEIGE)
+    for button in buttons_set[1]:
+        button.draw(screen)
+
 while True:
     clock.tick(FPS)
     # Event handing
+    # if(button_colddown_time > 0):
+        # button_colddown_time -= 1
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
         x, y = pygame.mouse.get_pos()
-        for button in buttons_set[page_value]:
+        # if button_colddown_time != 0:continue
+        for button in buttons_set[now_page_value]:
             button.clickJudge(x, y)
         if event.type == MOUSEBUTTONDOWN:
-            for button in buttons_set[page_value]:
+            for button in buttons_set[now_page_value]:
                 if button.choose:
                     print(button.key)
+                    keyline = button.key.split('to')
+                    prev_page_value = int(keyline[0])
+                    now_page_value = int(keyline[1])
+                    print(prev_page_value, now_page_value)
+                    # button_colddown_time = 10
     
-    if(page_value == 0):
-        home_page()
+    if(now_page_value == 0):
+        homePage()
+    elif(now_page_value == 1):
+        gamePage()
 
     # Update the screen
     pygame.display.update()
