@@ -4,7 +4,7 @@ import UI.text as text
 
 # button
 class Button:
-    def __init__(self, rect, color, text, text_color, font_link, font_size):
+    def __init__(self, rect, color, text, text_color, font_link, font_size, key):
         self.rect = rect
         self.color = color
         self.text = text
@@ -12,6 +12,7 @@ class Button:
         self.font_link = font_link
         self.font_size = font_size
         self.choose = False
+        self.key = key
 
     def clickJudge(self, x, y):
         if self.rect.collidepoint(x, y):
