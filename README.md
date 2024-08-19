@@ -34,7 +34,7 @@ python3 main.py
 ```
 Contributing
 ---
-Feel free to dive in! [Open an issue](https://github.com/boyan1001/2048/issues)or submit PRs.
+Feel free to dive in! [Open an issue](https://github.com/boyan1001/2048/issues) or submit PRs.
 
 Standard Readme follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.  
 
