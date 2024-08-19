@@ -25,6 +25,18 @@ UNITEDNATIONSBLUE = UI.hexToRgb('#5390D9') # 聯合國藍
 SLATEBLUE = UI.hexToRgb('#5E60CE') # 石板藍
 GRAPE = UI.hexToRgb('#6930C3') # 葡萄色
 FRENCHVOILET = UI.hexToRgb('#7400B8') # 紫羅蘭色
+MEDUIMSTATEBLUE = UI.hexToRgb('#9D53FF') # 中等藍色
+TROPICALVIOLET = UI.hexToRgb('#D882F7') # 熱帶紫羅蘭
+LAVENDER = UI.hexToRgb('#E0B0FF') # 薰衣草色
+CHAMPAGNEPINK = UI.hexToRgb('#F7D9E1') # 香檳粉
+SANDYBROWN = UI.hexToRgb('#FFB57D') # 沙褐色
+SANDYBROWN2 = UI.hexToRgb('#FB9649') # 沙褐色2
+BURNTSIENNA = UI.hexToRgb('#E76F51') # 焦土黃
+ENGINEERINGORANGE = UI.hexToRgb('#D00000') # 工程橙
+ROSEWOOD = UI.hexToRgb('#650000') # 紅木色
+RICHBLACK = UI.hexToRgb('#03071E') # 濃黑色
+GRAY3 = UI.hexToRgb('#918085') # 香檳粉
+GRAY4 = UI.hexToRgb('#438572') # 灰色4
 
 
 # Screen setting
@@ -56,6 +68,20 @@ def ptsCounterTextResize(pts):
         return 25
     elif pts < 1000000:
         return 20
+    else:
+        return 15
+
+def gameBlockTextResize(value):
+    if value < 100:
+        return 45
+    elif value < 1000:
+        return 36
+    elif value < 10000:
+        return 28
+    elif value < 100000:
+        return 23
+    elif value < 1000000:
+        return 18
     else:
         return 15
 
@@ -127,23 +153,23 @@ def gamePage():
         save = json.load(f)
 
     # random generate a new block
-    # if save['initialized'] == False:
-    #     save['initialized'] = True
-    #     save['board'] = [[0 for i in range(4)] for j in range(4)]
-    #     t = 0
+    if save['initialized'] == False:
+        save['initialized'] = True
+        save['board'] = [[0 for i in range(4)] for j in range(4)]
+        t = 0
     
-    #     while t < 2:
-    #         i = random.randint(0, 3)
-    #         j = random.randint(0, 3)
-    #         if(save['board'][i][j] == 0):
-    #             save['board'][i][j] = 2
-    #             t += 1
+        while t < 2:
+            i = random.randint(0, 3)
+            j = random.randint(0, 3)
+            if(save['board'][i][j] == 0):
+                save['board'][i][j] = 2
+                t += 1
         
-    #     with open('./docs/asset/save/save01.json', 'w') as f:
-    #         json.dump(save, f)
-    # now = save['board']
+        with open('./docs/save/save01.json', 'w') as f:
+            json.dump(save, f)
+    now = save['board']
 
-    # game block setting
+    # pts counters setting
     hpts = records['player']['highest_pts']
     pts = save['pts']
     blocks_set = gameBlockSetting()
@@ -151,6 +177,69 @@ def gamePage():
     pts_title = UI.Text(title_font_link, 20, 'Points', TIFFANYBLUE, 0.585 * screen_width, 0.07 * screen_height)
     hpts_text = UI.Text(title_font_link, ptsCounterTextResize(hpts), str(hpts), AERO, 0.845 * screen_width, 0.115 * screen_height)
     pts_text = UI.Text(title_font_link, ptsCounterTextResize(pts), str(pts), AERO, 0.585 * screen_width, 0.115 * screen_height)
+
+    # game block setting
+    # GRAY3 = UI.hexToRgb('#918085') # 灰色3
+    # GRAY4 = UI.hexToRgb('#438572') # 灰色4
+    # AQUAMARINE = UI.hexToRgb('#80FFDB') # 水藍色
+    # TURQUOISE = UI.hexToRgb('#72EFDD') # 藍綠色
+    # TIFFANYBLUE = UI.hexToRgb('#64DFDF') # 蒂芙尼藍
+    # SKYBLUE = UI.hexToRgb('#56CFE1') # 天藍色
+    # AERO = UI.hexToRgb('#48BFE3') # 青色
+    # PICTONBLUE = UI.hexToRgb('#4EA8DE') # 藍色
+    # UNITEDNATIONSBLUE = UI.hexToRgb('#5390D9') # 聯合國藍
+    # SLATEBLUE = UI.hexToRgb('#5E60CE') # 石板藍
+    # GRAPE = UI.hexToRgb('#6930C3') # 葡萄色
+    # FRENCHVOILET = UI.hexToRgb('#7400B8') # 紫羅蘭色
+    # MEDUIMSTATEBLUE = UI.hexToRgb('#9D53FF') # 中等藍色
+    # TROPICALVIOLET = UI.hexToRgb('#D882F7') # 熱帶紫羅蘭
+    # LAVENDER = UI.hexToRgb('#E0B0FF') # 薰衣草色
+    # CHAMPAGNEPINK = UI.hexToRgb('#F7D9E1') # 香檳粉
+    # SANDYBROWN = UI.hexToRgb('#FFB57D') # 沙褐色
+    # SANDYBROWN2 = UI.hexToRgb('#FB9649') # 沙褐色2
+    # BURNTSIENNA = UI.hexToRgb('#E76F51') # 焦土黃
+    # ENGINEERINGORANGE = UI.hexToRgb('#D00000') # 工程橙
+    # ROSEWOOD = UI.hexToRgb('#650000') # 紅木色
+    # RICHBLACK = UI.hexToRgb('#03071E') # 濃黑色
+    dic = {
+        -1: [GRAY3, WHITE],
+        2: [AQUAMARINE, GRAY4],
+        4: [TURQUOISE, GRAY4],
+        8: [TIFFANYBLUE, WHITE],
+        16: [SKYBLUE, WHITE],
+        32: [AERO, WHITE],
+        64: [PICTONBLUE, WHITE],
+        128: [UNITEDNATIONSBLUE, WHITE],
+        256: [SLATEBLUE, WHITE],
+        512: [GRAPE, WHITE],
+        1024: [FRENCHVOILET, WHITE],
+        2048: [MEDUIMSTATEBLUE, WHITE],
+        4096: [TROPICALVIOLET, WHITE],
+        8192: [LAVENDER, WHITE],
+        16384: [CHAMPAGNEPINK, GRAY3],
+        32768: [SANDYBROWN, WHITE],
+        65536: [SANDYBROWN2, WHITE],
+        131072: [BURNTSIENNA, WHITE],
+        262144: [ENGINEERINGORANGE, WHITE],
+        524288: [ROSEWOOD, WHITE],
+        1048576: [RICHBLACK, WHITE],
+    }
+    gameBlocks = []
+    for i in range(4):
+        for j in range(4):
+            value = now[i][j]
+            if value == 0:continue
+            gap_w = 0.028
+            gap_h = 0.018
+            block_w = (0.92 - 5 * gap_w) / 4
+            block_h = (0.6 - 5 * gap_h) / 4
+            if(value not in dic):
+                gameBlocks.append(UI.Block(pygame.Rect((0.04 + gap_w) * screen_width + j * (block_w + gap_w) * screen_width, (0.3 + gap_h) * screen_height + i * (block_h + gap_h) * screen_height, block_w * screen_width, block_h * screen_height), dic[-1][0], 'error', dic[-1][1], title_font_link, 30, 0.05))
+            elif(value > 1048576):
+                gameBlocks.append(UI.Block(pygame.Rect((0.04 + gap_w) * screen_width + j * (block_w + gap_w) * screen_width, (0.3 + gap_h) * screen_height + i * (block_h + gap_h) * screen_height, block_w * screen_width, block_h * screen_height), dic[1048576][0], str(1048576), dic[1048576][1], title_font_link, gameBlockTextResize(1048576), 0.05))
+            else:
+                gameBlocks.append(UI.Block(pygame.Rect((0.04 + gap_w) * screen_width + j * (block_w + gap_w) * screen_width, (0.3 + gap_h) * screen_height + i * (block_h + gap_h) * screen_height, block_w * screen_width, block_h * screen_height), dic[value][0], str(value), dic[value][1], title_font_link, gameBlockTextResize(value), 0.05))
+
     # Draw the screen
     screen.fill(PICTONBLUE)
     screen.blit(game_page_background, (0, 0))
@@ -169,6 +258,9 @@ def gamePage():
     pts_title.drawText(screen)
     # Draw the game board
     for block in blocks_set[1]:
+        block.draw(screen)
+    # Draw the game blocks
+    for block in gameBlocks:
         block.draw(screen)
 
     # write records
