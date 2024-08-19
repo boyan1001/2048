@@ -4,7 +4,7 @@
         "highest_pts": 0,
         "game_time": 0
     },
-    "achievements":[
+    "achievements": [
         {
             "name": "First Game",
             "description": "Play your first game.",
@@ -29,7 +29,8 @@
             "name": "16384",
             "description": "Unbelievable! You reach 16384!",
             "status": false
-        },{
+        },
+        {
             "name": "32768",
             "description": "You reach 32768. You are the god!",
             "status": false

@@ -1,6 +1,8 @@
 import pygame, sys
 from pygame.locals import *
 import tools.UI as UI
+import random
+import json
 
 # Colors
 WHITE = UI.hexToRgb('#FFFFFF')
@@ -47,24 +49,36 @@ open_title = UI.Text(title_font_link, 100, '2048', WHITE, 0.5 * screen_width, 0.
 game_title = UI.Text(title_font_link, 70, '2048', WHITE, 0.24 * screen_width, 0.1 * screen_height)
 quote_text = UI.Text(title_font_link, 14, 'Join the numbers and get to the 2048 tile!', WHITE, 0.378 * screen_width, 0.185 * screen_height)
 
-# block_set
-blocks_set = []
-# game page
-blocks = []
-blocks.append(UI.Block(pygame.Rect(0.73 * screen_width, 0.05 * screen_height, 0.23 * screen_width, 0.09 * screen_height), WHITE, '', WHITE, title_font_link, 35, 0.05))
-blocks.append(UI.Block(pygame.Rect(0.47 * screen_width, 0.05 * screen_height, 0.23 * screen_width, 0.09 * screen_height), WHITE, '', WHITE, title_font_link, 35, 0.05))
-blocks.append(UI.Block(pygame.Rect(0.04 * screen_width, 0.3* screen_height, 0.92 * screen_width, 0.6 * screen_height), WHITE, '', WHITE, title_font_link, 35, 0.05))
-blocks_set.append(blocks)
-blocks = []
-gap_w = 0.028
-gap_h = 0.018
-block_w = (0.92 - 5 * gap_w) / 4
-# block_h = 0.1125
-block_h = (0.6 - 5 * gap_h) / 4
-for i in range(4):
-    for j in range(4):
-        blocks.append(UI.Block(pygame.Rect((0.04 + gap_w) * screen_width + j * (block_w + gap_w) * screen_width, (0.3 + gap_h) * screen_height + i * (block_h + gap_h) * screen_height, block_w * screen_width, block_h * screen_height), GRAY2, '', WHITE, title_font_link, 35, 0.05))
-blocks_set.append(blocks)
+def ptsCounterTextResize(pts):
+    if pts < 10000:
+        return 30
+    elif pts < 100000:
+        return 25
+    elif pts < 1000000:
+        return 20
+    else:
+        return 15
+
+def gameBlockSetting():
+    # block_set
+    blocks_set = []
+    # game page
+    blocks = []
+    blocks.append(UI.Block(pygame.Rect(0.73 * screen_width, 0.05 * screen_height, 0.23 * screen_width, 0.09 * screen_height), WHITE, '', SKYBLUE, title_font_link, 35, 0.05))
+    blocks.append(UI.Block(pygame.Rect(0.47 * screen_width, 0.05 * screen_height, 0.23 * screen_width, 0.09 * screen_height), WHITE, '', SKYBLUE, title_font_link, 35, 0.05))
+    blocks.append(UI.Block(pygame.Rect(0.04 * screen_width, 0.3* screen_height, 0.92 * screen_width, 0.6 * screen_height), WHITE, '', WHITE, title_font_link, 35, 0.05))
+    blocks_set.append(blocks)
+    blocks = []
+    gap_w = 0.028
+    gap_h = 0.018
+    block_w = (0.92 - 5 * gap_w) / 4
+    # block_h = 0.1125
+    block_h = (0.6 - 5 * gap_h) / 4
+    for i in range(4):
+        for j in range(4):
+            blocks.append(UI.Block(pygame.Rect((0.04 + gap_w) * screen_width + j * (block_w + gap_w) * screen_width, (0.3 + gap_h) * screen_height + i * (block_h + gap_h) * screen_height, block_w * screen_width, block_h * screen_height), GRAY2, '', WHITE, title_font_link, 35, 0.05))
+    blocks_set.append(blocks)
+    return blocks_set
 
 # buttons_set
 buttons_set = []
@@ -102,6 +116,41 @@ def homePage():
 
 def gamePage():
     # read records
+    records = []
+    with open('./docs/record/records.json', 'r') as f:
+        records = json.load(f)
+
+    # read saves
+    save = []
+    now = []
+    with open('./docs/save/save01.json', 'r') as f:
+        save = json.load(f)
+
+    # random generate a new block
+    # if save['initialized'] == False:
+    #     save['initialized'] = True
+    #     save['board'] = [[0 for i in range(4)] for j in range(4)]
+    #     t = 0
+    
+    #     while t < 2:
+    #         i = random.randint(0, 3)
+    #         j = random.randint(0, 3)
+    #         if(save['board'][i][j] == 0):
+    #             save['board'][i][j] = 2
+    #             t += 1
+        
+    #     with open('./docs/asset/save/save01.json', 'w') as f:
+    #         json.dump(save, f)
+    # now = save['board']
+
+    # game block setting
+    hpts = records['player']['highest_pts']
+    pts = save['pts']
+    blocks_set = gameBlockSetting()
+    hpts_title = UI.Text(title_font_link, 20, 'Best', TIFFANYBLUE, 0.845 * screen_width, 0.07 * screen_height)
+    pts_title = UI.Text(title_font_link, 20, 'Points', TIFFANYBLUE, 0.585 * screen_width, 0.07 * screen_height)
+    hpts_text = UI.Text(title_font_link, ptsCounterTextResize(hpts), str(hpts), AERO, 0.845 * screen_width, 0.115 * screen_height)
+    pts_text = UI.Text(title_font_link, ptsCounterTextResize(pts), str(pts), AERO, 0.585 * screen_width, 0.115 * screen_height)
     # Draw the screen
     screen.fill(PICTONBLUE)
     screen.blit(game_page_background, (0, 0))
@@ -114,12 +163,15 @@ def gamePage():
     # Draw the score counter block and the history highest score block
     for block in blocks_set[0]:
         block.drawWithShadow(screen, UNITEDNATIONSBLUE, 3)
+    hpts_text.drawText(screen)
+    pts_text.drawText(screen)
+    hpts_title.drawText(screen)
+    pts_title.drawText(screen)
     # Draw the game board
     for block in blocks_set[1]:
         block.draw(screen)
 
     # write records
-now = [[0 for i in range(4)] for j in range(4)]
 while True:
     clock.tick(FPS)
     # Event handing
