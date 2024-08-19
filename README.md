@@ -32,6 +32,12 @@ If you meet the requirement of this game. You can execute this game by this:
 ```bash
 python3 main.py
 ```
+Contributing
+---
+Feel free to dive in! [Open an issue](https://github.com/RichardLitt/standard-readme/issues/new) or submit PRs.
+
+Standard Readme follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.  
+
 License
 ---
 [MIT](LICENSE) © Hank Chen  
