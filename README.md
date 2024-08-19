@@ -1,5 +1,5 @@
 2048 - Summer Version
-===
+===  
 2048 is a popular single-player game. It was created by Garbriele Cirulli in March 2014. During these years, there are a lot of games based on 2048 have been created.  
   
 **2048 - Summer Version** is also a game based on 2048. Summer is the theme of this game, so I add some patern about summer in it. Moreover, I also add some additional functions (likes bgm) in the game to improve User's Experience.  
