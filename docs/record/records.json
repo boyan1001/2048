@@ -1,0 +1,78 @@
+{
+    "player": {
+        "name": "",
+        "highest_pts": 0,
+        "game_time": 0
+    },
+    "achievements":[
+        {
+            "name": "First Game",
+            "description": "Play your first game.",
+            "status": false
+        },
+        {
+            "name": "2048",
+            "description": "You get the first 2048. Yeah!",
+            "status": false
+        },
+        {
+            "name": "4096",
+            "description": "You reach 4096. Keep going!",
+            "status": false
+        },
+        {
+            "name": "8192",
+            "description": "You reach 8192. You are the best!",
+            "status": false
+        },
+        {
+            "name": "16384",
+            "description": "Unbelievable! You reach 16384!",
+            "status": false
+        },{
+            "name": "32768",
+            "description": "You reach 32768. You are the god!",
+            "status": false
+        },
+        {
+            "name": "The end?",
+            "description": "You reach 65536. You are the god of god!",
+            "status": false
+        },
+        {
+            "name": "Beginner",
+            "description": "You get 1000 pts.",
+            "status": false
+        },
+        {
+            "name": "Intermediate",
+            "description": "You get 5000 pts.",
+            "status": false
+        },
+        {
+            "name": "Advanced",
+            "description": "You get 10000 pts.",
+            "status": false
+        },
+        {
+            "name": "Expert",
+            "description": "You get 20000 pts.",
+            "status": false
+        },
+        {
+            "name": "Master",
+            "description": "You get 50000 pts.",
+            "status": false
+        },
+        {
+            "name": "Legend",
+            "description": "You get 100000 pts.",
+            "status": false
+        },
+        {
+            "name": "Easter egg!",
+            "description": "You found our secret page.",
+            "status": false
+        }
+    ]
+}

@@ -119,7 +119,7 @@ def gamePage():
         block.draw(screen)
 
     # write records
-
+now = [[0 for i in range(4)] for j in range(4)]
 while True:
     clock.tick(FPS)
     # Event handing
