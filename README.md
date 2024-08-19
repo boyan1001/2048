@@ -34,4 +34,4 @@ python3 main.py
 ```
 License
 ---
-MIT © Hank Chen  
+[MIT](LICENSE) © Hank Chen  
