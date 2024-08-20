@@ -44,6 +44,14 @@ screen_height = 600
 game_title = UI.Text(title_font_link, 70, '2048', UI.WHITE, 0.24 * screen_width, 0.1 * screen_height)
 quote_text = UI.Text(title_font_link, 14, 'Join the numbers and get to the 2048 tile!', UI.WHITE, 0.378 * screen_width, 0.185 * screen_height)
 
+
+# game_page_background
+def gamePageBackground():
+    game_page_background = pygame.image.load('./docs/asset/image/game_page_background.png')
+    game_page_background = pygame.transform.scale(game_page_background, (screen_width, screen_height * 1.2))
+    game_page_background.convert()
+    return game_page_background
+
 def gameButtonSetting():
     buttons = []
     buttons.append(UI.Button(pygame.Rect(0.73 * screen_width, 0.16 * screen_height, 0.23 * screen_width, 0.05 * screen_height), UI.TIFFANYBLUE, 'MENU', UI.WHITE, title_font_link, 20, '1to0'))
@@ -70,7 +78,7 @@ def gameBlockSetting():
     blocks_set.append(blocks)
     return blocks_set
 
-def gamePage(records, save, screen, game_page_background, buttons, now):
+def gamePage(records, save, screen, buttons, now):
     # pts counters setting
     hpts = records['player']['highest_pts']
     pts = save['pts']
@@ -79,6 +87,9 @@ def gamePage(records, save, screen, game_page_background, buttons, now):
     pts_title = UI.Text(title_font_link, 20, 'Points', UI.TIFFANYBLUE, 0.585 * screen_width, 0.07 * screen_height)
     hpts_text = UI.Text(title_font_link, UI.ptsCounterTextResize(hpts), str(hpts), UI.AERO, 0.845 * screen_width, 0.115 * screen_height)
     pts_text = UI.Text(title_font_link, UI.ptsCounterTextResize(pts), str(pts), UI.AERO, 0.585 * screen_width, 0.115 * screen_height)
+
+    # image
+    game_page_background = gamePageBackground()
 
     # game block setting
     dic = {
