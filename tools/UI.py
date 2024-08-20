@@ -6,7 +6,63 @@ def hexToRgb(hex_color):
     hex_color = hex_color.lstrip('#')
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
+WHITE = hexToRgb('#FFFFFF')
+BLACK = hexToRgb('#000000')
+GRAY = hexToRgb('#F2F2F2')
+GRAY2 = hexToRgb('#E3E3E3')
+BLUE1 = hexToRgb('#73C6D9')
+BLUE2 = hexToRgb('#5EA3A3')
+BLUE3 = hexToRgb('#3A656A')
+BLUE4 = hexToRgb('#2E4E50')
+BLUE5 = hexToRgb('#AAEBFF')
+BEIGE = hexToRgb('#F2EBDC') # 米黃色
+AQUAMARINE = hexToRgb('#80FFDB') # 水藍色
+TURQUOISE = hexToRgb('#72EFDD') # 藍綠色
+TIFFANYBLUE = hexToRgb('#64DFDF') # 蒂芙尼藍
+SKYBLUE = hexToRgb('#56CFE1') # 天藍色
+AERO = hexToRgb('#48BFE3') # 青色
+PICTONBLUE = hexToRgb('#4EA8DE') # 藍色
+UNITEDNATIONSBLUE = hexToRgb('#5390D9') # 聯合國藍
+SLATEBLUE = hexToRgb('#5E60CE') # 石板藍
+GRAPE = hexToRgb('#6930C3') # 葡萄色
+FRENCHVOILET = hexToRgb('#7400B8') # 紫羅蘭色
+MEDUIMSTATEBLUE = hexToRgb('#9D53FF') # 中等藍色
+TROPICALVIOLET = hexToRgb('#D882F7') # 熱帶紫羅蘭
+LAVENDER = hexToRgb('#E0B0FF') # 薰衣草色
+CHAMPAGNEPINK = hexToRgb('#F7D9E1') # 香檳粉
+SANDYBROWN = hexToRgb('#FFB57D') # 沙褐色
+SANDYBROWN2 = hexToRgb('#FB9649') # 沙褐色2
+BURNTSIENNA = hexToRgb('#E76F51') # 焦土黃
+ENGINEERINGORANGE = hexToRgb('#D00000') # 工程橙
+ROSEWOOD = hexToRgb('#650000') # 紅木色
+RICHBLACK = hexToRgb('#03071E') # 濃黑色
+GRAY3 = hexToRgb('#918085') # 香檳粉
+GRAY4 = hexToRgb('#438572') # 灰色4
+
 # Text
+def ptsCounterTextResize(pts):
+    if pts < 10000:
+        return 30
+    elif pts < 100000:
+        return 25
+    elif pts < 1000000:
+        return 20
+    else:
+        return 15
+
+def gameBlockTextResize(value):
+    if value < 100:
+        return 45
+    elif value < 1000:
+        return 36
+    elif value < 10000:
+        return 28
+    elif value < 100000:
+        return 23
+    elif value < 1000000:
+        return 18
+    else:
+        return 15
 class Text:
     def __init__(self, font_link, size, text, color, x, y):
         self.font_link = font_link
