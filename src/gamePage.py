@@ -167,19 +167,26 @@ def readRecords():
 
     return records, save
 
+def writeRecords(records, save, now):
+    save['board'] = now
+    with open('./docs/record/records.json', 'w') as f:
+        json.dump(records, f, indent=4)
+    with open('./docs/save/save01.json', 'w') as f:
+        json.dump(save, f, indent=4)
+
 def randomGenerate(save, now):
     if(save['initialized'] == False):
         save['initialized'] = True
         for t in range(2):
             i = random.randint(0, 3)
             j = random.randint(0, 3)
-            while now[i][j] == 0:
+            while now[i][j] != 0:
                 i = random.randint(0, 3)
                 j = random.randint(0, 3)
             if(t == 0):
                 now[i][j] = 2
             else:
-                now[i][j] = 4 / random.randint(1, 2)
+                now[i][j] = int(4 / random.randint(1, 2))
     else:
         zeros = []
         for i in range(4):
@@ -189,5 +196,5 @@ def randomGenerate(save, now):
         n = len(zeros)
         x = random.randint(0, n - 1)
         i, j = zeros[x]
-        now[i][j] = 2
+        now[i][j] = int(4 / random.randint(1, 2))
     return now

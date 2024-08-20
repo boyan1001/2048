@@ -100,9 +100,10 @@ while True:
             temp_rd, temp_sv = game.readRecords()
             now = temp_sv['board']
             if(temp_sv['initialized'] == False):
-                game.randomGenerate(now)
+                game.randomGenerate(temp_sv, now)
                 temp_sv['initialized'] = True
         game.gamePage(temp_rd, temp_sv, screen, buttons, now)
+        game.writeRecords(temp_rd, temp_sv, now)
 
     # Update the screen
     pygame.display.update()
